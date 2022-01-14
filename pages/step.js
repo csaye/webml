@@ -34,6 +34,21 @@ export default function Step() {
     ctx.fillRect(goalX * grid, goalY * grid, grid, grid);
   }
 
+  // steps canvas
+  function step() {
+    const index = Math.floor(Math.random() * 4);
+    if (index == 0) {
+      blockX += 1;
+    } else if (index == 1) {
+      blockX -= 1;
+    } else if (index == 2) {
+      blockY += 1;
+    } else if (index == 3) {
+      blockY -= 1;
+    }
+    draw();
+  }
+
   // get canvas context on start
   useEffect(() => {
     canvas = canvasRef.current;
@@ -43,6 +58,11 @@ export default function Step() {
 
   return (
     <div className={styles.container}>
+      <div>
+        <button onClick={step}>
+          Step
+        </button>
+      </div>
       <canvas
         ref={canvasRef}
         width={width}
