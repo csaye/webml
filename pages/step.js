@@ -34,6 +34,27 @@ export default function Step() {
     ctx.fillRect(goalX * grid, goalY * grid, grid, grid);
   }
 
+  // returns distance to goal from given position
+  function dist(x, y) {
+    return (x - goalX) + (y - goalY);
+  }
+
+  // returns highest possible distance
+  function high() {
+    const distA = dist(0, 0);
+    const distB = dist(gridWidth - 1, 0);
+    const distC = dist(0, gridHeight - 1);
+    const distD = dist(gridWidth - 1, gridHeight - 1);
+    return Math.max(distA, distB, distC, distD);
+  }
+
+  // returns score for current outcome
+  function score() {
+    const highest = high();
+    const distance = dist(blockX, blockY);
+    return (highest - distance) / highest;
+  }
+
   // steps canvas
   function step() {
     const index = Math.floor(Math.random() * 4);
