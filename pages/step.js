@@ -3,6 +3,14 @@ import { useEffect, useRef } from 'react';
 let canvas;
 let ctx;
 
+const gridWidth = 33;
+const gridHeight = 33;
+const gridSize = 16;
+const width = gridWidth * gridSize;
+const height = gridHeight * gridSize;
+
+import styles from '../styles/pages/Step.module.css';
+
 export default function Step() {
   const canvasRef = useRef();
 
@@ -13,11 +21,11 @@ export default function Step() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <canvas
         ref={canvasRef}
-        width="256"
-        height="256"
+        width={width}
+        height={height}
       />
     </div>
   );
