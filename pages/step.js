@@ -9,8 +9,8 @@ const grid = 16;
 const width = gridWidth * grid;
 const height = gridHeight * grid;
 
-const blockX = 16;
-const blockY = 16;
+let blockX = 16;
+let blockY = 16;
 
 const goalX = 32;
 const goalY = 16;
@@ -41,7 +41,7 @@ export default function Step() {
 
   // returns distance to goal from given position
   function dist(x, y) {
-    return (x - goalX) + (y - goalY);
+    return Math.abs(x - goalX) + Math.abs(y - goalY);
   }
 
   // returns highest possible distance
@@ -60,18 +60,23 @@ export default function Step() {
     return (highest - distance) / highest;
   }
 
-  // steps canvas
-  function step() {
-    const index = Math.floor(Math.random() * 4);
-    if (index == 0) {
+  // moves block
+  function move() {
+    const direction = path[index];
+    if (direction == 0) {
       blockX += 1;
-    } else if (index == 1) {
+    } else if (direction == 1) {
       blockX -= 1;
-    } else if (index == 2) {
+    } else if (direction == 2) {
       blockY += 1;
-    } else if (index == 3) {
+    } else if (direction == 3) {
       blockY -= 1;
     }
+    if (blockX < 0) blockX = 0;
+    if (blockX > gridWidth - 1) blockX = gridWidth - 1;
+    if (blockY < 0) blockY = 0;
+    if (blockY > gridHeight - 1) blockY = gridHeight - 1;
+  }
 
   // resets block
   function reset() {
