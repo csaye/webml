@@ -19,13 +19,14 @@ const steps = 16;
 
 let path = [];
 
+let index = 0;
+
 import styles from '../styles/pages/Step.module.css';
 
 export default function Step() {
   const canvasRef = useRef();
 
-  const [index, setIndex] = useState(0);
-  const [iteration, setIteration] = useState(0);
+  const [iteration, setIteration] = useState(undefined);
 
   // draws canvas
   function draw() {
@@ -96,9 +97,12 @@ export default function Step() {
     draw();
     if (index === steps - 1) {
       setIteration(old => old + 1);
-      setIndex(0);
+      index = 0;
       reset();
-    } else setIndex(old => old + 1);
+    } else {
+      index += 1;
+      setTimeout(step, 100);
+    }
   }
 
   // get canvas context on start
@@ -107,6 +111,7 @@ export default function Step() {
     ctx = canvas.getContext('2d');
     reset();
     draw();
+    setIteration(0);
   }, []);
 
   return (
