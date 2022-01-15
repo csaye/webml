@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 let canvas;
 let ctx;
@@ -23,6 +23,9 @@ import styles from '../styles/pages/Step.module.css';
 
 export default function Step() {
   const canvasRef = useRef();
+
+  const [index, setIndex] = useState(0);
+  const [iteration, setIteration] = useState(0);
 
   // draws canvas
   function draw() {
@@ -82,7 +85,15 @@ export default function Step() {
     }
   }
 
+  // steps canvas
+  function step() {
+    move();
     draw();
+    if (index === steps - 1) {
+      setIteration(old => old + 1);
+      setIndex(0);
+      reset();
+    } else setIndex(old => old + 1);
   }
 
   // get canvas context on start
