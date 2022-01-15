@@ -17,6 +17,8 @@ const goalY = 16;
 
 const steps = 16;
 
+let path = [];
+
 import styles from '../styles/pages/Step.module.css';
 
 export default function Step() {
@@ -67,6 +69,19 @@ export default function Step() {
     } else if (index == 3) {
       blockY -= 1;
     }
+
+  // resets block
+  function reset() {
+    // reset position
+    blockX = 16;
+    blockY = 16;
+    // regenerate path
+    path = [];
+    for (let i = 0; i < steps; i++) {
+      path.push(Math.floor(Math.random() * 4));
+    }
+  }
+
     draw();
   }
 
@@ -74,6 +89,7 @@ export default function Step() {
   useEffect(() => {
     canvas = canvasRef.current;
     ctx = canvas.getContext('2d');
+    reset();
     draw();
   }, []);
 
