@@ -79,7 +79,11 @@ export default function Step() {
 
   return (
     <div className={styles.container}>
-      <div>
+      <div className={styles.toolbar}>
+        <p>Index {index}</p>
+        <p>Iteration {iteration}</p>
+        <p>Score {score()}</p>
+        <p>Path {path}</p>
         <button onClick={step}>
           Step
         </button>

@@ -6,6 +6,17 @@
   background: #000;
 }
 
+.toolbar {
+  position: absolute;
+  top: 0;
+  color: #fff;
+  width: 480px;
+}
+
+.toolbar > p {
+  margin: 0;
+}
+
 .container > canvas {
   background: #fff;
 }
