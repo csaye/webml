@@ -1,0 +1,19 @@
+.container {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.container > a {
+  margin: 0 10px;
+  color: #fff;
+}
+
+.container > a:hover {
+  color: #2196f3;
+}
