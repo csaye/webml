@@ -1,3 +1,5 @@
+import Header from '../components/Header';
+
 import { useEffect, useRef, useState } from 'react';
 
 let canvas;
@@ -116,6 +118,7 @@ export default function Step() {
 
   return (
     <div className={styles.container}>
+      <Header />
       <div className={styles.toolbar}>
         <p>Index {index}</p>
         <p>Iteration {iteration}</p>
