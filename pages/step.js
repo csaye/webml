@@ -33,6 +33,7 @@ export default function Step() {
   const canvasRef = useRef();
 
   const [iteration, setIteration] = useState(undefined);
+  const [cont, setCont] = useState(false);
 
   // draws canvas
   function draw() {
@@ -104,14 +105,15 @@ export default function Step() {
     draw();
     // rollover
     if (index === steps - 1) {
-      setIteration(old => old + 1);
-      index = 0;
       // update weighting
       const currScore = score();
       for (let i = 0; i < steps; i++) {
         weights[i][path[i]].push(currScore);
       }
       reset();
+      setIteration(old => old + 1);
+      index = 0;
+      if (cont) setTimeout(step, 100);
     // increment
     } else {
       index += 1;
@@ -162,6 +164,11 @@ export default function Step() {
         <button onClick={step}>
           Step
         </button>
+        <input
+          type="checkbox"
+          checked={cont}
+          onChange={e => setCont(e.target.checked)}
+        />
       </div>
       <canvas
         ref={canvasRef}
