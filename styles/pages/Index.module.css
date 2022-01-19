@@ -1,0 +1,13 @@
+.container {
+  background: #000;
+  height: 100%;
+  overflow: auto;
+}
+
+.center {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
