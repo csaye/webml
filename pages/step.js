@@ -20,6 +20,10 @@ const goalY = 16;
 const steps = 16;
 
 let path = [];
+let weights = [];
+for (let i = 0; i < steps; i++) {
+  weights.push([[], [], [], []]);
+}
 
 let index = 0;
 
@@ -95,12 +99,20 @@ export default function Step() {
 
   // steps canvas
   function step() {
+    // handle
     move();
     draw();
+    // rollover
     if (index === steps - 1) {
       setIteration(old => old + 1);
       index = 0;
+      // update weighting
+      const currScore = score();
+      for (let i = 0; i < steps; i++) {
+        weights[i][path[i]].push(currScore);
+      }
       reset();
+    // increment
     } else {
       index += 1;
       setTimeout(step, 100);
