@@ -19,6 +19,8 @@ const goalY = 16;
 
 const steps = 16;
 
+const delay = 1;
+
 let path = [];
 let weights = [];
 for (let i = 0; i < steps; i++) {
@@ -114,11 +116,11 @@ export default function Step() {
       reset();
       setIteration(old => old + 1);
       index = 0;
-      if (go) setTimeout(step, 100);
+      if (go) setTimeout(step, delay);
     // increment
     } else {
       index += 1;
-      setTimeout(step, 100);
+      setTimeout(step, delay);
     }
   }
 
@@ -155,14 +157,13 @@ export default function Step() {
     <div className={styles.container}>
       <Header />
       <p className={styles.weights}>
-        Weights {JSON.stringify(averageWeights(true))}
+        Weights<br />{JSON.stringify(averageWeights(true))}
       </p>
       <div className={styles.toolbar}>
-        <p>Index {index}</p>
-        <p>Iteration {iteration}</p>
-        <p>Score {score()}</p>
+        <p>Index {index} Iteration {iteration} Score {score().toFixed(2)}</p>
         <p>Path {path}</p>
         <button onClick={() => {
+          if (go) return;
           go = true;
           step();
         }}>
