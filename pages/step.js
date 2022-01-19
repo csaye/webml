@@ -134,6 +134,24 @@ export default function Step() {
     return true;
   }
 
+  // determines best weighted path
+  function bestPath() {
+    if (!validWeights()) return 'N/A';
+    const best = [];
+    for (const arr of averageWeights()) {
+      let idx = -1;
+      let max = 0;
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i] && arr[i] > max) {
+          max = arr[i];
+          idx = i;
+        }
+      }
+      best.push(idx);
+    }
+    return best;
+  }
+
   // returns averaged weights array
   function averageWeights(round) {
     const averaged = [];
