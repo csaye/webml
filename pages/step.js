@@ -28,7 +28,7 @@ for (let i = 0; i < steps; i++) {
 }
 
 let index = 0;
-let go = true;
+let go = false;
 
 import styles from '../styles/pages/Step.module.css';
 
@@ -124,6 +124,14 @@ export default function Step() {
     }
   }
 
+  // runs best possible path
+  function runBest() {
+    if (!validWeights()) return;
+    path = bestPath();
+    go = false;
+    step();
+  }
+
   // returns whether current weights are valid
   function validWeights() {
     for (const arr of averageWeights()) {
@@ -190,6 +198,11 @@ export default function Step() {
       <div className={styles.toolbar}>
         <p>Index {index} Iteration {iteration} Score {score().toFixed(2)}</p>
         <p>Path {path}</p>
+        <p>
+          Best path {bestPath()}
+          {' '}
+          {validWeights() && <button onClick={runBest}>Run</button>}
+        </p>
         <button onClick={() => {
           if (go) return;
           go = true;
