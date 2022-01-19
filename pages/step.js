@@ -119,6 +119,22 @@ export default function Step() {
     }
   }
 
+  // returns averaged weights array
+  function averageWeights() {
+    const averaged = [];
+    for (let i = 0; i < steps; i++) {
+      const arr = weights[i];
+      const newArr = [];
+      for (const subArr of arr) {
+        const len = subArr.length;
+        if (len === 0) newArr.push(null);
+        else newArr.push(subArr.reduce((a, b) => a + b) / len);
+      }
+      averaged.push(newArr);
+    }
+    return averaged;
+  }
+
   // get canvas context on start
   useEffect(() => {
     canvas = canvasRef.current;
