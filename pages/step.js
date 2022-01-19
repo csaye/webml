@@ -26,6 +26,7 @@ for (let i = 0; i < steps; i++) {
 }
 
 let index = 0;
+let go = true;
 
 import styles from '../styles/pages/Step.module.css';
 
@@ -113,7 +114,7 @@ export default function Step() {
       reset();
       setIteration(old => old + 1);
       index = 0;
-      if (cont) setTimeout(step, 100);
+      if (go) setTimeout(step, 100);
     // increment
     } else {
       index += 1;
@@ -161,14 +162,17 @@ export default function Step() {
         <p>Iteration {iteration}</p>
         <p>Score {score()}</p>
         <p>Path {path}</p>
-        <button onClick={step}>
+        <button onClick={() => {
+          go = true;
+          step();
+        }}>
           Step
         </button>
-        <input
-          type="checkbox"
-          checked={cont}
-          onChange={e => setCont(e.target.checked)}
-        />
+        <button onClick={() => {
+          go = false;
+        }}>
+          Stop
+        </button>
       </div>
       <canvas
         ref={canvasRef}
