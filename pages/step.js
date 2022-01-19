@@ -124,6 +124,16 @@ export default function Step() {
     }
   }
 
+  // returns whether current weights are valid
+  function validWeights() {
+    for (const arr of averageWeights()) {
+      for (const elem of arr) {
+        if (elem === null) return false;
+      }
+    }
+    return true;
+  }
+
   // returns averaged weights array
   function averageWeights(round) {
     const averaged = [];
