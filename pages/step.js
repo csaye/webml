@@ -14,8 +14,8 @@ const height = gridHeight * grid;
 let blockX = 16;
 let blockY = 16;
 
-const goalX = 32;
-const goalY = 16;
+let goalX = 32;
+let goalY = 16;
 
 const steps = 16;
 
@@ -180,6 +180,15 @@ export default function Step() {
     return averaged;
   }
 
+  // randomizes goal position
+  function randomize() {
+    reset();
+    setIteration(0);
+    goalX = Math.floor(Math.random() * 32);
+    goalY = Math.floor(Math.random() * 32);
+    draw();
+  }
+
   // get canvas context on start
   useEffect(() => {
     canvas = canvasRef.current;
@@ -214,6 +223,11 @@ export default function Step() {
           go = false;
         }}>
           Stop
+        </button>
+        <button onClick={() => {
+          randomize();
+        }}>
+          Randomize
         </button>
       </div>
       <canvas
