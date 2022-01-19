@@ -120,7 +120,7 @@ export default function Step() {
   }
 
   // returns averaged weights array
-  function averageWeights() {
+  function averageWeights(round) {
     const averaged = [];
     for (let i = 0; i < steps; i++) {
       const arr = weights[i];
@@ -128,7 +128,11 @@ export default function Step() {
       for (const subArr of arr) {
         const len = subArr.length;
         if (len === 0) newArr.push(null);
-        else newArr.push(subArr.reduce((a, b) => a + b) / len);
+        else {
+          let avg = subArr.reduce((a, b) => a + b) / len;
+          if (round) avg = parseFloat(avg.toFixed(2));
+          newArr.push(avg);
+        }
       }
       averaged.push(newArr);
     }
@@ -148,7 +152,7 @@ export default function Step() {
     <div className={styles.container}>
       <Header />
       <p className={styles.weights}>
-        Weights {JSON.stringify(weights)}
+        Weights {JSON.stringify(averageWeights(true))}
       </p>
       <div className={styles.toolbar}>
         <p>Index {index}</p>
