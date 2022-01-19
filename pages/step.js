@@ -131,6 +131,9 @@ export default function Step() {
   return (
     <div className={styles.container}>
       <Header />
+      <p className={styles.weights}>
+        Weights {JSON.stringify(weights)}
+      </p>
       <div className={styles.toolbar}>
         <p>Index {index}</p>
         <p>Iteration {iteration}</p>
